@@ -24,11 +24,11 @@ DefaultConfig={
 
 config=Config('build-eclipse.yml',DefaultConfig)
 
-properties=Properties()
-properties.properties=config.get('ant.properties.keys',{})
-for filename in config.get('ant.properties.files',[]):
-    properties.Load(filename)
-
-env = os.environ.copy()
-properties.properties=replace_vars(properties.properties,env)
-properties.Save(config.get('outfile','/tmp/jenkins-%%JOB_NAME%%.properties'))
+outfile=config.get('outfile','/tmp/jenkins-%%JOB_NAME%%.properties')
+with log.info('Building %s...',outfile):
+    properties=Properties()
+    properties.properties=config.get('ant.properties.keys',{})
+    env = os.environ.copy()
+    for filename in config.get('ant.properties.files',[]):
+        properties.Load(filename,expand_vars=env)
+    properties.Save(outfile)

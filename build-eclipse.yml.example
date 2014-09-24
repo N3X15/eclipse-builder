@@ -1,0 +1,7 @@
+ant:
+  properties:
+    files:
+    - build.properties
+    keys: {}
+    outfile: /tmp/jenkins-%%JOB_NAME%%.properties
+    secret-keys: []
