@@ -29,5 +29,6 @@ with log.info('Building %s...',outfile):
     properties=Properties()
     properties.properties=config.get('ant.properties.keys',{})
     for filename in config.get('ant.properties.files',[]):
-        properties.Load(filename,expand_vars=os.environ.copy())
+        filename=replace_vars(filename,os.environ)
+        properties.Load(filename,expand_vars=os.environ)
     properties.Save(outfile)

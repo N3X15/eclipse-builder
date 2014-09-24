@@ -52,3 +52,5 @@ docs/_build/
 
 # PyBuilder
 target/
+build.properties
+build-eclipse.yml
